@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 
 #Convert CSV files to DataFrame
 slcsp = pd.read_csv("./slcsp.csv",)
@@ -15,7 +16,7 @@ zips['zipcode'] = zips['zipcode'].str.rjust(5, "0")
 silver_plans = plans[plans['metal_level'].str.contains('Silver')]
 
 #Prints header
-print("zipcode, rate")
+sys.stdout.write("zipcode, rate\n")
 
 #Make calculations for each zipcode in slcsp.csv
 for code in slcsp['zipcode']:
@@ -26,7 +27,7 @@ for code in slcsp['zipcode']:
     
     #Will print the zipcode with no rate if there are multiple rate_areas
     if len(set(filtered_zips['rate_area'])) > 1:
-        print("{code},".format(code=code))
+        sys.stdout.write("{code},\n".format(code=code))
         continue
 
     #Grabs the state based on the zipcode
@@ -40,11 +41,11 @@ for code in slcsp['zipcode']:
 
     #Will print code and exit if only one Silver plan exists
     if len(filtered_rate_list['metal_level'])  == 1:
-        print("{code},".format(code=code))
+        sys.stdout.write("{code},\n".format(code=code))
         continue
 
     #Will save the rate to the final_rate variable as long as there's more than one rate
     final_rate = "%1.2f " % filtered_rate_list.rate.iloc[-2] if len(filtered_rate_list.rate) > 1 else ''
 
     #Prints the final output
-    print("{code}, {final_rate}".format(code = code, final_rate = final_rate))
+    sys.stdout.write("{code}, {final_rate}\n".format(code = code, final_rate = final_rate))
