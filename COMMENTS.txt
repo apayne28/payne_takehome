@@ -4,6 +4,6 @@ Instructions:
 
 2. Open preferred terminal and change the directory to the repository folder
 
-3. Install requirements by running "pip install -r requirements.txt "
+3. Install requirements by running "pip install -r requirements.txt" (without quotes)
 
 4. Once requirements are installed, run "python3 ./index.py" (without quotes)
